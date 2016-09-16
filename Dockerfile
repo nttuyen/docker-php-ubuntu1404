@@ -11,6 +11,8 @@ RUN a2enmod rewrite
 RUN echo 'xdebug.remote_autostart=0' >> /etc/php5/mods-available/xdebug.ini
 RUN echo 'xdebug.remote_enable=1' >> /etc/php5/mods-available/xdebug.ini
 RUN echo 'xdebug.remote_connect_back=1' >> /etc/php5/mods-available/xdebug.ini
+RUN echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
+RUN echo 'nameserver 8.8.4.4' >> /etc/resolv.conf
 
 COPY apache2-foreground /usr/local/bin/
 RUN chmod a+x /usr/local/bin/apache2-foreground
