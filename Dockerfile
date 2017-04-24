@@ -15,10 +15,17 @@ RUN echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 RUN echo 'nameserver 8.8.4.4' >> /etc/resolv.conf
 
 COPY apache2-foreground /usr/local/bin/
+COPY entrypoint.sh		/usr/local/bin/
 RUN chmod a+x /usr/local/bin/apache2-foreground
+RUN chmod a+x /usr/local/bin/entrypoint.sh
+
+RUN mkdir /installer.d
+RUN mkdir /startup.d
+
 WORKDIR /var/www/html
 
-VOLUME ["/var/www/html"]
+VOLUME ["/var/www/html", "/installer.d", "/startup.d"]
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["apache2"]
